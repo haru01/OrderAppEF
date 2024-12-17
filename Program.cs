@@ -8,7 +8,11 @@ class Program
     {
         using var context = new OrderDbContext();
 
-        // データ追加
+        // データ削除
+        context.Orders.RemoveRange(context.Orders);
+        context.SaveChanges();
+        PrintOrders(context);
+        // Orderデータ追加
         var order = new Order
         {
             CustomerName = "John Doe",
@@ -21,18 +25,54 @@ class Program
 
         context.Orders.Add(order);
         context.SaveChanges();
+        PrintOrders(context);
 
-        // データ確認
-        var savedOrders = context.Orders
+        // OrderDetailsを新たにデータ追加
+        var order2 = context.Orders
+            .Include(o => o.OrderDetails)
+            .FirstOrDefault();
+        order2?.OrderDetails.Add(new OrderDetail { ProductName = "Cherry", Quantity = 10 });
+        context.SaveChanges();
+        PrintOrders(context);
+
+        // OrderDetailsのプロパティを更新
+        var order3 = context.Orders
+            .Include(o => o.OrderDetails)
+            .FirstOrDefault();
+        var detail = order3?.OrderDetails.FirstOrDefault(od => od.ProductName == "Apple");
+        if (detail != null)
+        {
+            detail.Quantity = 2000;
+        }
+        context.SaveChanges();
+        PrintOrders(context);
+
+        // OrderDetailsの一部を削除
+        var order4 = context.Orders
+            .Include(o => o.OrderDetails)
+            .FirstOrDefault();
+        var detail2 = order3?.OrderDetails.FirstOrDefault();
+        if (detail2 != null)
+        {
+            order4?.OrderDetails.Remove(detail2);
+        }
+        context.SaveChanges();
+        PrintOrders(context);
+    }
+
+    public static void PrintOrders(OrderDbContext context)
+    {
+        Console.WriteLine("Print Orders ====");
+        var orders = context.Orders
             .Include(o => o.OrderDetails)
             .ToList();
 
-        foreach (var o in savedOrders)
+        foreach (var o in orders)
         {
             Console.WriteLine($"Order ID: {o.Id}, Customer: {o.CustomerName}");
             foreach (var detail in o.OrderDetails)
             {
-                Console.WriteLine($" - Product: {detail.ProductName}, Quantity: {detail.Quantity}");
+                Console.WriteLine($" - Product: {detail.ProductName}, Quantity: {detail.Quantity}, detailsID: {detail.Id}");
             }
         }
     }
