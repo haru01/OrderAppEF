@@ -69,10 +69,10 @@ class Program
 
         foreach (var o in orders)
         {
-            Console.WriteLine($"Order ID: {o.Id}, Customer: {o.CustomerName}");
+            Console.WriteLine($"Order ID: {o.OrderId}, Customer: {o.CustomerName}");
             foreach (var detail in o.OrderDetails)
             {
-                Console.WriteLine($" - Product: {detail.ProductName}, Quantity: {detail.Quantity}, detailsID: {detail.Id}");
+                Console.WriteLine($" - Product: {detail.ProductName}, Quantity: {detail.Quantity}, detailsID: {detail.OrderDetailId}");
             }
         }
     }

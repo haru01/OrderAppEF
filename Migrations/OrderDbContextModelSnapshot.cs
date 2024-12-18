@@ -18,7 +18,7 @@ namespace OrderApp.Migrations
 
             modelBuilder.Entity("OrderApp.Models.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -29,14 +29,14 @@ namespace OrderApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrderId");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("OrderApp.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderDetailId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -50,7 +50,7 @@ namespace OrderApp.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrderDetailId");
 
                     b.HasIndex("OrderId");
 

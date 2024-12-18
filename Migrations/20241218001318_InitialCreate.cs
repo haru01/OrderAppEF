@@ -14,21 +14,21 @@ namespace OrderApp.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrderId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CustomerName = table.Column<string>(type: "TEXT", nullable: false),
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    OrderDetailId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     OrderId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductName = table.Column<string>(type: "TEXT", nullable: false),
@@ -36,12 +36,12 @@ namespace OrderApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => x.Id);
+                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
