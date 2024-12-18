@@ -33,6 +33,7 @@ dotnet run
 ```
 
 以下は生成AIの解説メモ
+本家はこっち： https://learn.microsoft.com/ja-jp/ef/core/
 
 # Entity Framework の規約（Conventions）
 
