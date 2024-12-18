@@ -12,7 +12,9 @@ class Program
         context.Orders.RemoveRange(context.Orders);
         context.SaveChanges();
         PrintOrders(context);
-        // Orderデータ追加
+        //
+        Console.WriteLine("== Orderデータ新規追加 ===============");
+        Console.WriteLine("=====================================");
         var order = new Order
         {
             CustomerName = "John Doe",
@@ -28,6 +30,8 @@ class Program
         PrintOrders(context);
 
         // OrderDetailsを新たにデータ追加
+        Console.WriteLine("== OrderDetailsを新たにデータ追加 ===============");
+        Console.WriteLine("====================================================");
         var order2 = context.Orders
             .Include(o => o.OrderDetails)
             .FirstOrDefault();
@@ -36,6 +40,8 @@ class Program
         PrintOrders(context);
 
         // OrderDetailsのプロパティを更新
+        Console.WriteLine("== 特定のOrderDetailsのプロパティを更新 ===============");
+        Console.WriteLine("====================================================");
         var order3 = context.Orders
             .Include(o => o.OrderDetails)
             .FirstOrDefault();
@@ -48,6 +54,8 @@ class Program
         PrintOrders(context);
 
         // OrderDetailsの一部を削除
+        Console.WriteLine("== OrderDetailsの一部を削除 ===================================");
+        Console.WriteLine("====================================================");
         var order4 = context.Orders
             .Include(o => o.OrderDetails)
             .FirstOrDefault();

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OrderApp.Models;
 
 namespace OrderApp.Data
@@ -7,9 +8,9 @@ namespace OrderApp.Data
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
             optionsBuilder.UseSqlite("Data Source=orderapp.db");
         }
     }
